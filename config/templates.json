@@ -1,0 +1,94 @@
+{
+  "article": {
+    "name": "文章配图",
+    "description": "公众号/博客文章的 H2 章节配图",
+    "triggers": ["文章配图", "为文章配图", "article illustration"],
+    "defaults": {
+      "style": "minimalist",
+      "aspect_ratio": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    },
+    "cover": {
+      "enabled": false,
+      "style": "colorful_sketch",
+      "aspect_ratio": "2.35:1",
+      "width": 900,
+      "height": 383
+    }
+  },
+  "wechat_cover": {
+    "name": "公众号封面",
+    "description": "微信公众号文章封面图",
+    "triggers": ["公众号封面", "微信封面", "wechat cover"],
+    "defaults": {
+      "style": "colorful_sketch",
+      "aspect_ratio": "2.35:1",
+      "width": 900,
+      "height": 383,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    }
+  },
+  "xiaohongshu": {
+    "name": "小红书配图",
+    "description": "小红书帖子配图，竖版",
+    "triggers": ["小红书", "小红书配图", "xiaohongshu"],
+    "defaults": {
+      "style": "colorful_sketch",
+      "aspect_ratio": "3:4",
+      "width": 1242,
+      "height": 1660,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    }
+  },
+  "xiaohongshu_cover": {
+    "name": "小红书封面",
+    "description": "小红书帖子封面，正方形或竖版",
+    "triggers": ["小红书封面"],
+    "defaults": {
+      "style": "colorful_sketch",
+      "aspect_ratio": "1:1",
+      "width": 1080,
+      "height": 1080,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    }
+  },
+  "x_cover": {
+    "name": "X文章封面",
+    "description": "X (Twitter) Articles 封面图",
+    "triggers": ["X封面", "Twitter封面", "x cover"],
+    "defaults": {
+      "style": "minimalist",
+      "aspect_ratio": "5:2",
+      "width": 1500,
+      "height": 600,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    }
+  },
+  "paper": {
+    "name": "论文配图",
+    "description": "学术论文解读文章配图",
+    "triggers": ["论文配图", "paper illustration"],
+    "defaults": {
+      "style": "newyorker",
+      "aspect_ratio": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "provider": "jimeng-4.1",
+      "retry_count": 2
+    },
+    "cover": {
+      "enabled": true,
+      "style": "newyorker",
+      "aspect_ratio": "16:9",
+      "width": 1920,
+      "height": 1080
+    }
+  }
+}

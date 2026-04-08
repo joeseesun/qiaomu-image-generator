@@ -1,0 +1,23 @@
+{
+  "default": "jimeng",
+  "providers": {
+    "jimeng": {
+      "name": "即梦",
+      "model": "jimeng-2.1",
+      "enabled": true,
+      "description": "即梦 4.5，高质量生图"
+    },
+    "z-image": {
+      "name": "通义 Z-Image",
+      "model": "Tongyi-MAI/Z-Image-Turbo",
+      "enabled": true,
+      "description": "阿里通义 Z-Image-Turbo，支持 LoRA"
+    },
+    "gemini": {
+      "name": "Gemini",
+      "model": "gemini-2.0-flash-exp-image-generation",
+      "enabled": false,
+      "description": "Google Gemini，当前不可用"
+    }
+  }
+}
