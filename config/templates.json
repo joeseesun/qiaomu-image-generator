@@ -90,5 +90,44 @@
       "width": 1920,
       "height": 1080
     }
+  },
+  "poster": {
+    "name": "海报设计",
+    "description": "电影感、活动、概念海报，强调符号化与有限色板",
+    "triggers": ["海报", "电影海报", "活动海报", "poster"],
+    "defaults": {
+      "style": "mondo-screenprint",
+      "aspect_ratio": "9:16",
+      "width": 720,
+      "height": 1280,
+      "provider": "jimeng",
+      "retry_count": 2
+    }
+  },
+  "book_cover": {
+    "name": "书籍封面",
+    "description": "书籍、读书笔记、电子书封面，强调缩略图可识别的单一象征",
+    "triggers": ["书籍封面", "图书封面", "读书封面", "book cover"],
+    "defaults": {
+      "style": "literary-mondo-cover",
+      "aspect_ratio": "2:3",
+      "width": 1024,
+      "height": 1536,
+      "provider": "jimeng",
+      "retry_count": 2
+    }
+  },
+  "album_cover": {
+    "name": "专辑封面",
+    "description": "歌曲、专辑、歌单封面，1:1 方形音乐封面",
+    "triggers": ["专辑封面", "音乐封面", "歌曲封面", "歌单封面", "album cover"],
+    "defaults": {
+      "style": "album-mondo-cover",
+      "aspect_ratio": "1:1",
+      "width": 1024,
+      "height": 1024,
+      "provider": "jimeng",
+      "retry_count": 2
+    }
   }
 }

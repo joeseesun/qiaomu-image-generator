@@ -213,6 +213,7 @@ def get_aspect_ratio_size(aspect_ratio: str) -> Tuple[int, int]:
     - 9:16 (720x1280) - 竖版
     - 4:3 (1024x768) - 横向
     - 3:4 (768x1024) - 竖向
+    - 2:3 (1024x1536) - 书封竖向
     - 2.35:1 (1280x544) - 超宽横版
 
     不支持的比例会自动 fallback 到 16:9
@@ -224,6 +225,7 @@ def get_aspect_ratio_size(aspect_ratio: str) -> Tuple[int, int]:
         "9:16": (720, 1280),
         "4:3": (1024, 768),
         "3:4": (768, 1024),
+        "2:3": (1024, 1536),
         "2.35:1": (1280, 544),
     }
 
@@ -238,7 +240,7 @@ def get_aspect_ratio_size(aspect_ratio: str) -> Tuple[int, int]:
 
 def get_jimeng_ratio(aspect_ratio: str) -> str:
     """Map local aspect ratio names to the ratio values accepted by Jimeng."""
-    supported = {"1:1", "16:9", "9:16", "4:3", "3:4", "2.35:1"}
+    supported = {"1:1", "16:9", "9:16", "4:3", "3:4", "2:3", "2.35:1"}
     if aspect_ratio in supported:
         return aspect_ratio
     import warnings

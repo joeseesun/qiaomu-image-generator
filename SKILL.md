@@ -38,12 +38,15 @@ Claude（智能层）
 | 小红书 | `xiaohongshu` | colorful_sketch | 3:4 | 1242×1660 |
 | X 封面 | `x_cover` | paper-watercolor-cover | 5:2 | 1500×600 |
 | 论文配图 | `paper` | newyorker | 16:9 | 1920×1080 |
+| 海报设计 | `poster` | mondo-screenprint | 9:16 | 720×1280 |
+| 书籍封面 | `book_cover` | literary-mondo-cover | 2:3 | 1024×1536 |
+| 专辑封面 | `album_cover` | album-mondo-cover | 1:1 | 1024×1024 |
 
 ---
 
 ## 风格选择指南
 
-共 **49 种风格**，每种风格都有 `use_cases` 字段标注适用场景。
+共 **66 种风格**，每种风格都有 `use_cases` 字段标注适用场景。
 
 ### 按场景推荐
 
@@ -55,6 +58,7 @@ Claude（智能层）
 | 文艺创作 | `watercolor`, `ink-painting`, `morandi`, `soft-watercolor` |
 | 轻松趣味 | `cartoon`, `children-book`, `paper-cut`, `newyorker` |
 | 传统文化 | `ink-painting`, `woodcut`, `retro-poster`, `screen-print` |
+| 海报/封面 | `mondo-screenprint`, `negative-space-poster`, `literary-mondo-cover`, `album-mondo-cover` |
 
 ### 常用风格速查
 
@@ -68,6 +72,10 @@ Claude（智能层）
 | `morandi` | 莫兰迪色系 | 极低饱和度灰调 | 文艺评论、设计分享 |
 | `children-book` | 儿童绘本 | 温暖柔和色彩 | 儿童科普、亲子教育 |
 | `isometric` | 等距视图 | 30度角斜视，立体感 | 技术架构、产品设计 |
+| `mondo-screenprint` | Mondo 丝网海报 | 有限色板、半调网点、符号化 | 海报、封面、活动图 |
+| `negative-space-poster` | 负空间概念海报 | 单一焦点、图底反转、隐藏意象 | 高级封面、电影感海报 |
+| `literary-mondo-cover` | 文学书封 | 克制、象征、强缩略图辨识度 | 书籍封面、读书笔记 |
+| `album-mondo-cover` | 专辑封面 | 1:1、音乐情绪、强视觉记忆点 | 音乐封面、歌单封面 |
 
 **完整风格列表**：见 `config/styles.json`，每种风格包含：
 - `name`: 中文名
@@ -86,6 +94,8 @@ Claude（智能层）
 读取文章
     ↓
 提炼核心关键词（1-3个关键词概括主题）
+    ↓
+提炼一个可视化符号（物件/轮廓/空间关系/隐喻）
     ↓
 选择封面风格（默认 paper-watercolor-cover）
     ↓
@@ -117,6 +127,26 @@ Claude（智能层）
 - 避免过长，控制在 20 字以内
 - 示例：`Qwen3-TTS 语音合成 3秒克隆`
 
+### Mondo 式视觉提炼法
+
+从 `qiaomu-mondo-poster-design` 整合来的封面/海报判断流程：
+
+1. **不要复述内容，先找符号**：把文章、歌词、书籍或活动压缩成一个最有记忆点的视觉符号，例如裂纹、门、眼睛、船、椅子、城市剪影、一本发光的书。
+2. **优先单一焦点**：封面通常只放一个主视觉，最多加入一个次级隐喻。宁可留白，也不要把所有概念都塞进去。
+3. **用构图讲故事**：从居中对称、负空间、几何框景、前中后景分层、剪影主导、尺度反差中选 1-2 个，不要全用。
+4. **有限色板**：海报/封面默认 2-5 色，明确冷暖或主辅色关系。避免泛泛写“色彩丰富”。
+5. **符号优于脸**：当主题涉及人物、歌手、作者或角色时，优先用剪影、背影、局部轮廓、物件和空间隐喻，避免让模型生成不稳定的人脸。
+6. **文字默认禁止**：除非用户明确要封面文字，否则 description 和负面词都应强调 no text/no letters/no logos。中文/英文标题后期排版更可靠。
+
+常用构图词可写进 description：
+
+- `中心单一焦点，周围大面积留白`
+- `负空间形成隐藏图像，图底反转`
+- `几何圆形/拱门/三角形框景`
+- `前景剪影、中景主体、远景光源三层空间`
+- `渺小人物面对巨大物体的尺度反差`
+- `单一象征物承载全部叙事`
+
 ### 封面风格推荐
 
 | 场景 | 推荐风格 |
@@ -136,6 +166,7 @@ Claude（智能层）
 - 场景类型（文章配图/封面/小红书等）
 - H2 章节数量
 - 用户的覆盖指令（如"用水彩风格"）
+- 是否属于海报/书封/专辑封面/音乐封面；如果是，必须先提炼视觉符号、构图模式和有限色板
 
 ### Step 2: 创建输出目录
 
@@ -342,6 +373,8 @@ python ~/.claude/skills/qiaomu-image-generator/scripts/generate.py \
 2. **大小对比**：高塔 vs 低建筑、巨大 vs 渺小
 3. **动态趋势**：向上攀登、向外扩散
 4. **视觉隐喻**：塔楼（地位）、攀登（追赶）
+5. **负空间**：空白处形成另一层图像或暗示未出现的主体
+6. **有限色板**：用 2-5 个明确色彩建立海报识别度
 
 **示例**：
 
@@ -363,6 +396,10 @@ Claude 应识别用户的自然语言指令并写入 JSON：
 | "用 Z-Image" / "用通义生图" | `provider: "z-image"` |
 | "用即梦" | `provider: "jimeng"` |
 | "封面要活泼一点" | `cover.style: "colorful_sketch"` |
+| "Mondo/海报感/电影海报" | `style: "mondo-screenprint"` |
+| "高级一点/极简概念/留白" | `style: "negative-space-poster"` |
+| "书籍封面/读书封面" | `template: "book_cover"` |
+| "专辑封面/音乐封面/歌单封面" | `template: "album_cover"` |
 
 **可用 Provider：**
 | Provider | 说明 |

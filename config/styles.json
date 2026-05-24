@@ -725,6 +725,69 @@
       "剪影设计"
     ]
   },
+  "mondo-screenprint": {
+    "name": "Mondo 丝网海报",
+    "description": "有限色板、平面色块、半调网点、复古电影海报构图",
+    "prompt": "Mondo alternative poster aesthetic, silkscreen print design, limited edition poster art, flat graphic color blocks, strong symbolic reinterpretation rather than literal scene, bold simplified shapes, iconic single focal point, vintage mid-century poster language.",
+    "suffix": "Use a limited 2-5 color palette with explicit high contrast, halftone dot texture, risograph or screen print grain, slight ink misregistration, clean geometric composition, strong negative space, poster-like visual hierarchy, no photorealism, no glossy gradients, no clutter. No text, no words, no letters, no logos, no watermarks.",
+    "use_cases": [
+      "海报设计",
+      "电影海报",
+      "活动海报",
+      "公众号封面",
+      "X封面",
+      "小红书封面",
+      "概念视觉",
+      "复古设计"
+    ]
+  },
+  "negative-space-poster": {
+    "name": "负空间概念海报",
+    "description": "Olly Moss 式图底反转，单一焦点，隐藏意象与大量留白",
+    "prompt": "Minimal conceptual poster design, clever figure-ground inversion, negative space storytelling, one iconic symbol carries the whole idea, ultra-clean silhouette language, restrained graphic abstraction, high-concept visual metaphor.",
+    "suffix": "One central focal element only, vast empty space, hidden secondary image formed by blank areas, 2-3 color screen print palette, crisp silhouette edges, strong thumbnail readability, sophisticated quiet tension, no facial details unless necessary, no decorative clutter. No text, no words, no letters, no logos, no watermarks.",
+    "use_cases": [
+      "高级封面",
+      "概念海报",
+      "电影感海报",
+      "书籍封面",
+      "专辑封面",
+      "悬疑主题",
+      "极简视觉",
+      "留白构图"
+    ]
+  },
+  "literary-mondo-cover": {
+    "name": "文学 Mondo 书封",
+    "description": "克制文学封面，单一象征物，纸张颗粒，强缩略图识别度",
+    "prompt": "Literary book cover design with Mondo screen print influence, sophisticated minimal symbolism, restrained editorial composition, one memorable object or spatial metaphor, vintage paperback cover sensibility, refined graphic restraint.",
+    "suffix": "Muted 2-4 color palette such as cream, charcoal, rust, sage, burgundy, or aged gold; paper grain, screen print texture, clean vertical hierarchy, strong shelf presence and thumbnail readability, conceptual rather than literal, elegant negative space. No text, no title, no author name, no letters, no logos, no watermarks.",
+    "use_cases": [
+      "书籍封面",
+      "读书笔记",
+      "文学主题",
+      "电子书封面",
+      "播客封面",
+      "知识封面",
+      "克制设计"
+    ]
+  },
+  "album-mondo-cover": {
+    "name": "Mondo 专辑封面",
+    "description": "1:1 音乐封面，情绪符号、复古印刷、强记忆点",
+    "prompt": "Square album cover design with Mondo-inspired screen print aesthetics, symbolic music mood distilled into one iconic image, bold graphic silhouette or object, alternative record sleeve design, emotional visual metaphor, vintage print craft.",
+    "suffix": "Square 1:1 composition, strong center or geometric framing, limited 2-5 color palette, halftone texture, paper grain, subtle ink misalignment, clear visual hook at small size, cinematic but not literal, no typography unless explicitly requested. No text, no words, no letters, no logos, no watermarks.",
+    "use_cases": [
+      "专辑封面",
+      "音乐封面",
+      "歌曲封面",
+      "歌单封面",
+      "Suno封面",
+      "播客封面",
+      "音乐视觉",
+      "复古唱片"
+    ]
+  },
   "ethereal-ink-fantasy": {
     "name": "空灵水墨奇幻",
     "description": "蓝白水墨晕染，云雾飘渺半透明，东方奇幻意境，空气透视",
