@@ -79,16 +79,18 @@ def get_api_credentials() -> Dict:
         config = json.loads(config_path.read_text(encoding='utf-8'))
         return {
             'jimeng_session_id': config.get('jimeng_session_id', ''),
-            'jimeng_api_url': config.get('jimeng_api_url', 'http://localhost:8000'),
-            'jimeng_model': config.get('jimeng_model', 'jimeng-image-4.5'),
+            'jimeng_api_key': config.get('jimeng_api_key', os.environ.get('JIMENG_API_KEY', 'jimeng@42')),
+            'jimeng_api_url': config.get('jimeng_api_url', 'https://api.qiaomu.ai/jimeng-auth'),
+            'jimeng_model': config.get('jimeng_model', 'jimeng-4.5'),
             'modelscope_api_key': config.get('modelscope_api_key', '')
         }
 
     # 回退到环境变量
     return {
         'jimeng_session_id': os.environ.get('JIMENG_SESSION_ID', ''),
-        'jimeng_api_url': os.environ.get('JIMENG_API_URL', 'http://localhost:8000'),
-        'jimeng_model': os.environ.get('JIMENG_MODEL', 'jimeng-image-4.5'),
+        'jimeng_api_key': os.environ.get('JIMENG_API_KEY', 'jimeng@42'),
+        'jimeng_api_url': os.environ.get('JIMENG_API_URL', 'https://api.qiaomu.ai/jimeng-auth'),
+        'jimeng_model': os.environ.get('JIMENG_MODEL', 'jimeng-4.5'),
         'modelscope_api_key': os.environ.get('MODELSCOPE_API_KEY', '')
     }
 
@@ -234,6 +236,16 @@ def get_aspect_ratio_size(aspect_ratio: str) -> Tuple[int, int]:
     return standard_sizes[aspect_ratio]
 
 
+def get_jimeng_ratio(aspect_ratio: str) -> str:
+    """Map local aspect ratio names to the ratio values accepted by Jimeng."""
+    supported = {"1:1", "16:9", "9:16", "4:3", "3:4", "2.35:1"}
+    if aspect_ratio in supported:
+        return aspect_ratio
+    import warnings
+    warnings.warn(f"即梦 API 不支持比例 '{aspect_ratio}'，已自动使用 16:9")
+    return "16:9"
+
+
 def call_jimeng_api(
     prompt: str,
     aspect_ratio: str = '16:9',
@@ -252,25 +264,25 @@ def call_jimeng_api(
     """
     credentials = get_api_credentials()
     session_id = credentials['jimeng_session_id']
-    api_url = credentials['jimeng_api_url']
+    api_key = credentials.get('jimeng_api_key', '')
+    api_url = credentials['jimeng_api_url'].rstrip('/')
     model = credentials['jimeng_model']
 
-    if not session_id:
-        raise ValueError("未设置 jimeng_session_id，请检查 ~/.claude/skills/shared-lib/config.json")
-
-    width, height = get_aspect_ratio_size(aspect_ratio)
+    if not api_key and not session_id:
+        raise ValueError("未设置 jimeng_api_key 或 jimeng_session_id，请检查 ~/.claude/skills/shared-lib/config.json")
 
     url = f"{api_url}/v1/images/generations"
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {session_id}'
-    }
+    headers = {'Content-Type': 'application/json'}
+    if api_key:
+        headers['X-API-Key'] = api_key
+    else:
+        headers['Authorization'] = f'Bearer {session_id}'
     data = {
         'model': model,
         'prompt': prompt,
         'negative_prompt': '低质量，模糊，变形，多余的文字，水印，杂乱，中文字符，中文标签，中文标注，中文标语，字母，数字，符号，文本框，标签，云文字，混合文字，乱码文字，彩色文字，文字覆盖层，字幕，说明文字，标题文字，any text, any words, any letters, any numbers, any Chinese characters, any symbols, watermarks, logos, labels',
-        'width': width,
-        'height': height,
+        'ratio': get_jimeng_ratio(aspect_ratio),
+        'resolution': '1k',
         'sample_strength': 0.7,
         'n': 1
     }
